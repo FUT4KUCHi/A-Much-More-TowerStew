@@ -1,0 +1,134 @@
+[gd_scene load_steps=14 format=3 uid="uid://creusvuv5qphp"]
+
+[ext_resource type="PackedScene" uid="uid://csh01bjvyuqw4" path="res://Scenes/player_v3.tscn" id="1_8r7r2"]
+[ext_resource type="Texture2D" uid="uid://cmr1fybml6518" path="res://Assets/Textures/Prototype_PNG/Dark/texture_01.png" id="1_dcfph"]
+[ext_resource type="Script" uid="uid://lychhs7iyr5b" path="res://Scripts/Core/level.gd" id="1_t5fre"]
+[ext_resource type="PackedScene" uid="uid://efk4ejfu6aur" path="res://Scenes/Prefabs/fridge.tscn" id="3_gfiy5"]
+[ext_resource type="PackedScene" uid="uid://cryfkte508v0c" path="res://Scenes/Prefabs/ingredient_box.tscn" id="4_seoo4"]
+[ext_resource type="PackedScene" uid="uid://cxmo7c21g282k" path="res://Scenes/Prefabs/trash_can.tscn" id="5_seoo4"]
+[ext_resource type="PackedScene" uid="uid://bhb1yqj0qxj3j" path="res://Scenes/Prefabs/sushi_table.tscn" id="7_xtkfo"]
+[ext_resource type="Script" uid="uid://cvsyyc55k0ppa" path="res://Scripts/Systems/debug.gd" id="7_y6snv"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dcfph"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_pglxw"]
+sky_material = SubResource("ProceduralSkyMaterial_dcfph")
+
+[sub_resource type="Environment" id="Environment_gfiy5"]
+background_mode = 2
+sky = SubResource("Sky_pglxw")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pglxw"]
+albedo_texture = ExtResource("1_dcfph")
+uv1_triplanar = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xtkfo"]
+bg_color = Color(0.0823529, 0.0823529, 0.0823529, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[node name="level03" type="Node"]
+script = ExtResource("1_t5fre")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_gfiy5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="Main" type="Node3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Main"]
+use_collision = true
+size = Vector3(100, 1, 100)
+material = SubResource("StandardMaterial3D_pglxw")
+
+[node name="Player" parent="SubViewportContainer/SubViewport/Main" instance=ExtResource("1_8r7r2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Camera3D" parent="SubViewportContainer/SubViewport/Main/Player" index="3"]
+size = 10.0
+
+[node name="EdgeDetection" parent="SubViewportContainer/SubViewport/Main/Player/Camera3D" index="0"]
+visible = false
+
+[node name="Fridge" parent="SubViewportContainer/SubViewport/Main" instance=ExtResource("3_gfiy5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 0)
+
+[node name="MeatStation" parent="SubViewportContainer/SubViewport/Main" instance=ExtResource("4_seoo4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 1.5)
+
+[node name="TrashCan" parent="SubViewportContainer/SubViewport/Main" instance=ExtResource("5_seoo4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 3)
+
+[node name="SushiTable" parent="SubViewportContainer/SubViewport/Main" instance=ExtResource("7_xtkfo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, -2)
+
+[node name="Debug" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(360, 200)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -224.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = 224.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_xtkfo")
+script = ExtResource("7_y6snv")
+
+[node name="Panel" type="Panel" parent="Debug"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Debug/Panel"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 50.0
+
+[node name="frames_per_second" type="Label" parent="Debug/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="customers" type="Label" parent="Debug/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ClockLabel" type="Label" parent="Debug/Panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Points" type="Label" parent="Debug/Panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="held_item" type="Label" parent="Debug/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="item_status" type="Label" parent="Debug/Panel/VBoxContainer"]
+layout_mode = 2
+
+[editable path="SubViewportContainer/SubViewport/Main/Player"]

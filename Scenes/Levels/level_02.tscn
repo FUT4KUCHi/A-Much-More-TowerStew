@@ -1,0 +1,384 @@
+[gd_scene load_steps=35 format=3 uid="uid://3oc6dee2bqqe"]
+
+[ext_resource type="Script" uid="uid://lychhs7iyr5b" path="res://Scripts/Core/level.gd" id="1_fwrqu"]
+[ext_resource type="PackedScene" uid="uid://b5s1n0ue1ebm8" path="res://Scenes/customer.tscn" id="2_g4e5w"]
+[ext_resource type="Script" uid="uid://bg7nd15m3gyb8" path="res://Scripts/Systems/seating_system.gd" id="3_28b8s"]
+[ext_resource type="Shader" uid="uid://cngm4n20h6qgu" path="res://Shaders/Post-Processing/edge_detection.gdshader" id="4_bli80"]
+[ext_resource type="Script" uid="uid://3nc7wo4me7r2" path="res://Scripts/Systems/serving_system.gd" id="4_r71vb"]
+[ext_resource type="PackedScene" uid="uid://o0l4rasjbk0i" path="res://Scenes/Prefabs/chairs_root.tscn" id="5_273s6"]
+[ext_resource type="Shader" uid="uid://drkv1ff31ecde" path="res://Shaders/Post-Processing/embyr_outline.gdshader" id="5_ekjuj"]
+[ext_resource type="PackedScene" uid="uid://c8uxqcy7en1lu" path="res://Scenes/Prefabs/chair.tscn" id="6_lgdv4"]
+[ext_resource type="Shader" uid="uid://bpvlcy53gtwoj" path="res://Shaders/Palette Limiting/fantasy24.gdshader" id="6_qfrmt"]
+[ext_resource type="PackedScene" uid="uid://dghdwtne0n73c" path="res://Scenes/Prefabs/table.tscn" id="7_3yipw"]
+[ext_resource type="PackedScene" uid="uid://y4c8n3rrpofj" path="res://Scenes/Prefabs/kitchen.tscn" id="7_bli80"]
+[ext_resource type="PackedScene" uid="uid://efk4ejfu6aur" path="res://Scenes/Prefabs/fridge.tscn" id="8_ekjuj"]
+[ext_resource type="PackedScene" uid="uid://csh01bjvyuqw4" path="res://Scenes/player_v3.tscn" id="11_273s6"]
+[ext_resource type="Shader" uid="uid://cc1g4eb4wseaf" path="res://Shaders/Post-Processing/m_water.gdshader" id="12_273s6"]
+[ext_resource type="PackedScene" uid="uid://bhb1yqj0qxj3j" path="res://Scenes/Prefabs/sushi_table.tscn" id="13_rrj2r"]
+[ext_resource type="PackedScene" uid="uid://cryfkte508v0c" path="res://Scenes/Prefabs/ingredient_box.tscn" id="14_bli80"]
+[ext_resource type="Resource" uid="uid://by1jtvb478wbu" path="res://Custom Resources/Ingredients/Egg.tres" id="15_qfrmt"]
+[ext_resource type="Resource" uid="uid://bsprwypbsk5wl" path="res://Custom Resources/Ingredients/RiceBall.tres" id="16_7dtio"]
+[ext_resource type="Script" uid="uid://cvsyyc55k0ppa" path="res://Scripts/Systems/debug.gd" id="18_3yipw"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_ekjuj"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3yipw"]
+render_priority = 0
+shader = ExtResource("4_bli80")
+shader_parameter/lightIntensity = 3.0
+shader_parameter/lineAlpha = 0.7
+shader_parameter/useLighting = true
+shader_parameter/lineHighlight = 0.2
+shader_parameter/lineShadow = 0.55
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qfrmt"]
+render_priority = 0
+shader = ExtResource("5_ekjuj")
+shader_parameter/outlineColor = Color(0, 0, 0, 1)
+shader_parameter/depth_threshold = 0.025
+shader_parameter/normal_threshold = 1.5
+shader_parameter/normal_smoothing = 1.0
+shader_parameter/max_thickness = 1.806
+shader_parameter/min_thickness = 0.5
+shader_parameter/max_distance = 75.0
+shader_parameter/min_distance = 2.0
+shader_parameter/grazing_fresnel_power = 5.0
+shader_parameter/grazing_angle_mask_power = 1.0
+shader_parameter/grazing_angle_modulation_factor = 50.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7dtio"]
+shader = ExtResource("6_qfrmt")
+shader_parameter/color_1 = Vector4(0.164706, 0.121569, 0.258824, 1)
+shader_parameter/color_2 = Vector4(0.176471, 0.14902, 0.25098, 1)
+shader_parameter/color_3 = Vector4(0.207843, 0.231373, 0.301961, 1)
+shader_parameter/color_4 = Vector4(0.305882, 0.313725, 0.458824, 1)
+shader_parameter/color_5 = Vector4(0.458824, 0.380392, 0.611765, 1)
+shader_parameter/color_6 = Vector4(0.635294, 0.517647, 0.741177, 1)
+shader_parameter/color_7 = Vector4(0.682353, 0.611765, 0.839216, 1)
+shader_parameter/color_8 = Vector4(0.627451, 0.607843, 0.803922, 1)
+shader_parameter/color_9 = Vector4(0.505882, 0.490196, 0.741177, 1)
+shader_parameter/color_10 = Vector4(0.462745, 0.462745, 0.639215, 1)
+shader_parameter/color_11 = Vector4(0.372549, 0.439216, 0.580392, 1)
+shader_parameter/color_12 = Vector4(0.286275, 0.319608, 0.509804, 1)
+shader_parameter/color_13 = Vector4(0.203922, 0.192157, 0.401961, 1)
+shader_parameter/color_14 = Vector4(0.121569, 0.121569, 0.341177, 1)
+shader_parameter/color_15 = Vector4(0.258824, 0.105882, 0.290196, 1)
+shader_parameter/color_16 = Vector4(0.419608, 0.168627, 0.380392, 1)
+shader_parameter/color_17 = Vector4(0.529412, 0.188235, 0.309804, 1)
+shader_parameter/color_18 = Vector4(0.658824, 0.160784, 0.160784, 1)
+shader_parameter/color_19 = Vector4(0.827451, 0.298039, 0.164706, 1)
+shader_parameter/color_20 = Vector4(0.851961, 0.537255, 0.298039, 1)
+shader_parameter/color_21 = Vector4(0.870588, 0.654902, 0.427451, 1)
+shader_parameter/color_22 = Vector4(0.909804, 0.85098, 0.6, 1)
+shader_parameter/color_23 = Vector4(0.941177, 0.960784, 0.784314, 1)
+shader_parameter/color_24 = Vector4(0.8, 0.858824, 0.721569, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_rrj2r"]
+
+[sub_resource type="Environment" id="Environment_bxe70"]
+background_mode = 1
+background_color = Color(0.0303848, 0.743119, 0.567958, 1)
+background_energy_multiplier = 0.1
+ambient_light_source = 2
+ambient_light_color = Color(0.520017, 0.277139, 1, 1)
+tonemap_mode = 3
+ssao_radius = 3.0
+ssil_intensity = 4.25
+sdfgi_use_occlusion = true
+glow_bloom = 1.0
+volumetric_fog_density = 0.04
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_d8tg7"]
+vertices = PackedVector3Array(11, 1.60068, 9.5, 11.25, 1.60068, 4.25, 9.5, 1.60068, 4, -7.5, 1.60068, 9.5, 9.5, 1.60068, -7.5, -7.5, 1.60068, -7.5, 16.5, 1.60068, 9.5, 16.5, 1.60068, 4.25)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(4, 2, 5), PackedInt32Array(5, 2, 3), PackedInt32Array(7, 6, 1), PackedInt32Array(1, 6, 0)]
+agent_height = 1.0
+agent_max_climb = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dtio"]
+albedo_color = Color(0.0781849, 0.134901, 0.216018, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_273s6"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rrj2r"]
+noise = SubResource("FastNoiseLite_273s6")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rrj2r"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bli80"]
+noise = SubResource("FastNoiseLite_rrj2r")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lgdv4"]
+render_priority = 0
+shader = ExtResource("12_273s6")
+shader_parameter/surfaceNoise = SubResource("NoiseTexture2D_bli80")
+shader_parameter/distortNoise = SubResource("NoiseTexture2D_rrj2r")
+shader_parameter/beer_factor = 10.0
+shader_parameter/foam_distance = 0.01
+shader_parameter/foam_max_distance = 0.4
+shader_parameter/foam_min_distance = 0.04
+shader_parameter/foam_color = Color(1, 1, 1, 1)
+shader_parameter/surface_noise_tiling = Vector2(1, 4)
+shader_parameter/surface_noise_scroll = Vector3(0.03, 0.03, 0)
+shader_parameter/surface_noise_cutoff = 0.777
+shader_parameter/surface_distortion_amount = 0.27
+shader_parameter/_DepthGradientShallow = Color(0.325, 0.807, 0.971, 0.725)
+shader_parameter/_DepthGradientDeep = Color(0.36851, 0.688986, 0.968738, 0.749)
+shader_parameter/_DepthMaxDistance = 1.0
+shader_parameter/_DepthFactor = 1.0
+shader_parameter/roughness = -1.675
+shader_parameter/specular = 0.75
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_r71vb"]
+material = SubResource("ShaderMaterial_lgdv4")
+size = Vector2(100, 100)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3yipw"]
+bg_color = Color(0.0823529, 0.0823529, 0.0823529, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[node name="level02" type="Node"]
+script = ExtResource("1_fwrqu")
+customer = ExtResource("2_g4e5w")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+canvas_cull_mask = 4294966273
+size = Vector2i(640, 360)
+render_target_update_mode = 4
+
+[node name="Main" type="Node3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="Player" parent="SubViewportContainer/SubViewport/Main" instance=ExtResource("11_273s6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 1, 7.3)
+
+[node name="Camera3D" parent="SubViewportContainer/SubViewport/Main/Player" index="3"]
+size = 8.0
+
+[node name="EdgeDetection" parent="SubViewportContainer/SubViewport/Main/Player/Camera3D" index="0"]
+visible = false
+transparency = 0.7
+mesh = SubResource("QuadMesh_ekjuj")
+surface_material_override/0 = SubResource("ShaderMaterial_3yipw")
+
+[node name="EmbryrOutline" parent="SubViewportContainer/SubViewport/Main/Player/Camera3D" index="1"]
+material_override = SubResource("ShaderMaterial_qfrmt")
+
+[node name="Palette" parent="SubViewportContainer/SubViewport/Main/Player/Camera3D" index="2"]
+visible = false
+modulate = Color(1, 1, 1, 0.278431)
+self_modulate = Color(1, 1, 1, 0.341176)
+material = SubResource("ShaderMaterial_7dtio")
+texture = SubResource("CanvasTexture_rrj2r")
+
+[node name="Systems" type="Node" parent="SubViewportContainer/SubViewport/Main"]
+
+[node name="SeatingSystem" type="Node" parent="SubViewportContainer/SubViewport/Main/Systems"]
+script = ExtResource("3_28b8s")
+
+[node name="ServingSystem" type="Node" parent="SubViewportContainer/SubViewport/Main/Systems"]
+script = ExtResource("4_r71vb")
+
+[node name="CookingSystem" type="Node" parent="SubViewportContainer/SubViewport/Main/Systems"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport/Main"]
+environment = SubResource("Environment_bxe70")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/Main"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+shadow_blur = 0.375
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="SubViewportContainer/SubViewport/Main"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.850681, 0)
+navigation_mesh = SubResource("NavigationMesh_d8tg7")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Main/NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.850681, 1)
+use_collision = true
+size = Vector3(18, 1, 18)
+material = SubResource("StandardMaterial3D_7dtio")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="SubViewportContainer/SubViewport/Main/NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0.850681, 6.95)
+use_collision = true
+size = Vector3(7, 1, 6.1)
+material = SubResource("StandardMaterial3D_7dtio")
+
+[node name="ChairsRoot" parent="SubViewportContainer/SubViewport/Main" instance=ExtResource("5_273s6")]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5, 0.1, -1)
+
+[node name="Chair" parent="SubViewportContainer/SubViewport/Main/ChairsRoot" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+
+[node name="Chair2" parent="SubViewportContainer/SubViewport/Main/ChairsRoot" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.2, 0)
+
+[node name="Chair3" parent="SubViewportContainer/SubViewport/Main/ChairsRoot" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.2, 4.76837e-07)
+
+[node name="Chair4" parent="SubViewportContainer/SubViewport/Main/ChairsRoot" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0.2, 0)
+
+[node name="Chair5" parent="SubViewportContainer/SubViewport/Main/ChairsRoot" instance=ExtResource("6_lgdv4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.53674e-07, 0.2, -6.7)
+
+[node name="Chair6" parent="SubViewportContainer/SubViewport/Main/ChairsRoot" instance=ExtResource("6_lgdv4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.2, -6.7)
+
+[node name="Chair7" parent="SubViewportContainer/SubViewport/Main/ChairsRoot" instance=ExtResource("6_lgdv4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.2, -6.7)
+
+[node name="Chair8" parent="SubViewportContainer/SubViewport/Main/ChairsRoot" instance=ExtResource("6_lgdv4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0.2, -6.7)
+
+[node name="Table5" parent="SubViewportContainer/SubViewport/Main/ChairsRoot" instance=ExtResource("7_3yipw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.76837e-07, 0.5, -5.2)
+
+[node name="Table6" parent="SubViewportContainer/SubViewport/Main/ChairsRoot" instance=ExtResource("7_3yipw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, -5.2)
+
+[node name="Table7" parent="SubViewportContainer/SubViewport/Main/ChairsRoot" instance=ExtResource("7_3yipw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.5, -5.2)
+
+[node name="Table8" parent="SubViewportContainer/SubViewport/Main/ChairsRoot" instance=ExtResource("7_3yipw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0.5, -5.2)
+
+[node name="Kitchen" parent="SubViewportContainer/SubViewport/Main" instance=ExtResource("7_bli80")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, -2.13163e-14, 0, 1, 0, 2.13163e-14, 0, 1, -5, 1, 0)
+
+[node name="Station" parent="SubViewportContainer/SubViewport/Main/Kitchen" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.4, 0, 4.5)
+
+[node name="Station2" parent="SubViewportContainer/SubViewport/Main/Kitchen" index="1"]
+transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 19.4, 0, 4.5)
+
+[node name="Station3" parent="SubViewportContainer/SubViewport/Main/Kitchen" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4, 0, 4.5)
+
+[node name="Table" parent="SubViewportContainer/SubViewport/Main/Kitchen" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, -0.4, 10)
+
+[node name="Table2" parent="SubViewportContainer/SubViewport/Main/Kitchen" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, -0.4, 9)
+
+[node name="Table3" parent="SubViewportContainer/SubViewport/Main/Kitchen" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, -0.4, 10)
+
+[node name="Table4" parent="SubViewportContainer/SubViewport/Main/Kitchen" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, -0.4, 10)
+
+[node name="Table7" parent="SubViewportContainer/SubViewport/Main/Kitchen" index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, -0.4, 8)
+
+[node name="Table5" parent="SubViewportContainer/SubViewport/Main/Kitchen" index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, -0.4, 7)
+
+[node name="TrashCan" parent="SubViewportContainer/SubViewport/Main/Kitchen" index="9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.4, 0, 4.5)
+
+[node name="Door" type="Node3D" parent="SubViewportContainer/SubViewport/Main"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 1, -6.7)
+
+[node name="Timer" type="Timer" parent="SubViewportContainer/SubViewport/Main"]
+
+[node name="Fridge" parent="SubViewportContainer/SubViewport/Main" instance=ExtResource("8_ekjuj")]
+transform = Transform3D(1, 1.05424e-08, 0, -1.05424e-08, 1, 4.36679e-09, 0, -4.36679e-09, 1, 13.4, 1, 4.5)
+
+[node name="IngredientBox" parent="SubViewportContainer/SubViewport/Main" instance=ExtResource("14_bli80")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4, 0.6, 10)
+ingredient = ExtResource("15_qfrmt")
+
+[node name="IngredientBox2" parent="SubViewportContainer/SubViewport/Main" instance=ExtResource("14_bli80")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.4, 0.6, 10)
+ingredient = ExtResource("16_7dtio")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer/SubViewport/Main"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 3)
+visible = false
+light_color = Color(0.86646, 0.38736, 1.92523e-07, 1)
+light_energy = 20.0
+omni_range = 15.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="SubViewportContainer/SubViewport/Main"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5388, 3, 6.96021)
+visible = false
+light_color = Color(0.86646, 0.38736, 1.92523e-07, 1)
+light_energy = 20.0
+omni_range = 15.0
+
+[node name="Water" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Main"]
+mesh = SubResource("PlaneMesh_r71vb")
+skeleton = NodePath("../..")
+
+[node name="SushiTable" parent="SubViewportContainer/SubViewport/Main" instance=ExtResource("13_rrj2r")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13.9, 0.6, 10)
+
+[node name="Debug" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(360, 200)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -384.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = 224.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3yipw")
+script = ExtResource("18_3yipw")
+
+[node name="Panel" type="Panel" parent="Debug"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Debug/Panel"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 50.0
+
+[node name="frames_per_second" type="Label" parent="Debug/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="customers" type="Label" parent="Debug/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ClockLabel" type="Label" parent="Debug/Panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Points" type="Label" parent="Debug/Panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="held_item" type="Label" parent="Debug/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="item_status" type="Label" parent="Debug/Panel/VBoxContainer"]
+layout_mode = 2
+
+[connection signal="timeout" from="SubViewportContainer/SubViewport/Main/Timer" to="." method="_on_timer_timeout"]
+
+[editable path="SubViewportContainer/SubViewport/Main/Player"]
+[editable path="SubViewportContainer/SubViewport/Main/ChairsRoot"]
+[editable path="SubViewportContainer/SubViewport/Main/Kitchen"]

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkbsx8ov0ojdr"]
+
+[ext_resource type="PackedScene" uid="uid://3oc6dee2bqqe" path="res://Scenes/Levels/level_02.tscn" id="1_8ksge"]
+[ext_resource type="PackedScene" uid="uid://creusvuv5qphp" path="res://Scenes/Levels/level_03.tscn" id="2_86yrp"]
+
+[node name="GameController" type="Node"]
+
+[node name="level02" parent="." instance=ExtResource("1_8ksge")]
+
+[node name="level03" parent="." instance=ExtResource("2_86yrp")]
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

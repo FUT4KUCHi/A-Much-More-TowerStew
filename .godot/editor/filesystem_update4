@@ -1,0 +1,17 @@
+res://Scenes/Levels/level_02.tscn
+res://Custom Resources/Food/SushiEgg.tres
+res://Shaders/Post-Processing/edge_detection.gdshader
+res://Shaders/Post-Processing/embyr_outline.gdshader
+res://Shaders/Palette Limiting/lospec500.gdshader
+res://Shaders/Palette Limiting/leftover_salad.gdshader
+res://Shaders/Post-Processing/FlexibleToon.gdshader
+res://Shaders/Materials/water_stylized.gdshader
+res://Scenes/Levels/level_03.tscn
+res://Scenes/Game/game_controller.tscn
+res://Scenes/player_v3.tscn
+res://Scenes/Prefabs/ingredient_box.tscn
+res://Scripts/Systems/hold_socket.gd
+res://Scripts/Singletons/global.gd
+res://Scenes/Prefabs/sushi_table.tscn
+res://Scenes/Prefabs/station.tscn
+res://Shaders/Palette Limiting/cyber37.gdshader
